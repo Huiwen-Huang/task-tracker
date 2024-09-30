@@ -8,10 +8,21 @@
     <div class="main col-md-6 m-auto mt-md-3 mt-5 d-flex justify-content-center align-items-center">
       <img src="../assets/img/to-do-list.png" alt="to-do-list" class="w-100">
     </div>
-    <router-link to="/login" class="text-light fs-5 py-2 d-inline-block fw-bold text-decoration-none btn btn-primary w-75 mt-md-3 mt-5">登入</router-link>
+    <!-- <router-link to="/login" class="text-light fs-5 py-2 d-inline-block fw-bold text-decoration-none btn btn-primary w-75 mt-md-3 mt-5">登入</router-link> -->
+    <button class="text-light fs-5 py-2 d-inline-block fw-bold text-decoration-none btn btn-primary w-75 mt-md-3 mt-5" @click="login">登入</button>
   </div>
 </div>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const login = () => {
+  router.push('/login')
+}
+</script>
 
 <style>
 h1{

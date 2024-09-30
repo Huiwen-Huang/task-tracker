@@ -4,5 +4,5 @@ module.exports = defineConfig({
   // 部署到 GitHub
   publicPath: process.env.NODE_ENV === 'production'
     ? '/task-tracker/'
-    : '/'
+    : './'
 })

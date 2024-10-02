@@ -1,6 +1,6 @@
 <template>
-  <div class="container mt-md-5 mt-3">
-    <div class="row mt-5 justify-content-center align-items-center">
+  <div class="container d-flex align-items-center">
+    <div class="row mt-4 justify-content-center align-items-center">
       <div class="col-md-5 col-10">
         <img src="../assets/img/girl-list.png" alt="list-girl" class="w-100">
       </div>
@@ -37,6 +37,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'app',
@@ -60,7 +61,8 @@ export default {
       axios.post(`${api}/users`, obj)
         .then((Response) => {
           console.log(Response.data)
-          router.push('/login')
+          successAlert()
+          setTimeout(() => router.push('/login'), 1500)
         })
         .catch((Error) => console.log(Error.response.data))
 
@@ -70,12 +72,23 @@ export default {
       userPswCheck.value = ''
     }
 
+    const successAlert = () => {
+      Swal.fire({
+        title: 'Welcome!',
+        text: '註冊成功，將自動跳轉到登入頁面',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+
     return {
       userName,
       userEmail,
       userPsw,
       userPswCheck,
-      signup
+      signup,
+      successAlert
     }
   }
 }

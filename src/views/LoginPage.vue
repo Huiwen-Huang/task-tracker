@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-md-5 mt-3">
+  <div class="container mt-md-5 mt-4 d-flex align-items-center">
     <div class="row mt-5 flex-sm-colum-reverse justify-content-center align-items-center">
       <div class="col-md-4 mt-md-5 mt-3 ms-md-5">
         <h3 class="fs-3 fw-bold text-center mb-md-4 mb-2">登入會員</h3>
@@ -29,6 +29,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'app',
@@ -39,6 +40,7 @@ export default {
     const userPsw = ref('')
 
     let token = ''
+    let username = ''
 
     const login = () => {
       const obj = {
@@ -49,55 +51,32 @@ export default {
       }
       axios.post(`${api}/users/sign_in`, obj).then((Response) => {
         token = Response.headers.authorization
+        username = Response.data.nickname
         console.log(Response, token)
         localStorage.setItem('token', token)
-        router.push('/todo')
+        localStorage.setItem('username', username)
+        loginAlert()
+        setTimeout(() => router.push('/todo'), 1500)
       }).catch((Error) => console.log(Error.response))
 
       userEmail.value = ''
       userPsw.value = ''
     }
 
-    const newTodo = ref('')
-    const addTodo = () => {
-      const todo = {
-        todo: {
-          content: newTodo.value
-        }
-      }
-      const tokenKey = {
-        headers: {
-          Authorization: token
-        }
-      }
-      axios.post(`${api}/todos`, todo, tokenKey).then((Response) => console.log(Response)).catch((Error) => console.log(Error.response.data))
+    const loginAlert = () => {
+      Swal.fire({
+        title: 'Welcome to <br> TaskTracker!',
+        // html: 'Welcome to <br> TaskTracker!',
+        showConfirmButton: false,
+        timer: 1200
+      })
     }
-    const getTodo = () => {
-      axios.get(`${api}/todos`, {
-        headers: {
-          Authorization: token
-        }
-      }).then((Response) => {
-        console.log(Response)
-        const body = document.querySelector('body')
-        const alltodo = document.querySelector('.alltodo').textContent = Response.data.todos.join(' ')
-        body.appendChild(alltodo)
-      }).catch((Error) => console.log(Error.response.data))
-    }
-    // onMounted(() => {
-    //   axios.get(`${api}/todos`, {
-    //     headers: {
-    //       Authorization: token
-    //     }
-    //   }).then((Response) => console.log(Response))
-    // })
+
     return {
       userEmail,
       userPsw,
       login,
-      getTodo,
-      addTodo,
-      newTodo
+      loginAlert
     }
   }
 }
@@ -106,5 +85,8 @@ export default {
 <style>
 .row{
   min-height: 80vh;
+}
+.swal2-title{
+  line-height: 1.5;
 }
 </style>

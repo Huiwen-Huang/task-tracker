@@ -21,6 +21,10 @@ const routes = [
     path: '/todo',
     name: 'todo',
     component: () => import('../views/TodoList.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/NotFound.vue')
   }
 ]
 

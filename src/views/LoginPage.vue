@@ -55,28 +55,38 @@ export default {
         console.log(Response, token)
         localStorage.setItem('token', token)
         localStorage.setItem('username', username)
-        loginAlert()
+        successAlert()
         setTimeout(() => router.push('/todo'), 1500)
-      }).catch((Error) => console.log(Error.response))
-
+      }).catch((Error) => {
+        errorAlert()
+        console.log(Error.response)
+      })
       userEmail.value = ''
       userPsw.value = ''
     }
 
-    const loginAlert = () => {
+    const successAlert = () => {
       Swal.fire({
         title: 'Welcome to <br> TaskTracker!',
-        // html: 'Welcome to <br> TaskTracker!',
         showConfirmButton: false,
         timer: 1200
+      })
+    }
+    const errorAlert = () => {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please login again.',
+        icon: 'error',
+        iconColor: '#F3B562',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#A7C4B5'
       })
     }
 
     return {
       userEmail,
       userPsw,
-      login,
-      loginAlert
+      login
     }
   }
 }

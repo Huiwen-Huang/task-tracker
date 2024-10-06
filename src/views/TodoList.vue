@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-3">
     <!-- header -->
     <div class="row mt-5 justify-content-between align-items-center m-auto">
       <div class="col-md-4 col-12 px-md-0 px-5 mb-md-0 mb-3">
@@ -21,25 +21,34 @@
           <option value="work">Work</option>
         </select>
         <input type="text" class="form-control-lg w-75 border border-primary text-center" placeholder="Add New Todo Now!" v-model="newTodo">
-        <button class="btn"><i class="bi bi-plus-square fs-1 text-primary ms-2"></i></button>
+        <button class="btn btn-outline-primary ms-2"><i class="fa-solid fa-plus"></i></button>
       </form>
       <!-- todoList -->
-      <div class="col-md-10 col-10 m-auto mt-5 d-md-flex justify-content-md-between">
-        <div class="card border-primary me-md-3 mb-3 mx-auto w-25">
+      <div class="col-md-9 col-11 mx-auto mt-5 p-0 d-md-flex justify-content-md-between">
+        <div class="card border-primary me-md-3 mb-4 mx-auto w-100">
           <div class="card-header fs-4 fw-bold p-3 text-center text-secondary">Personal</div>
           <div class="card-body text-primary">
             <ul v-if="todos.length > 0">
-              <li class="d-flex align-items-center"
+              <li class="d-flex justify-content-start align-items-center border rounded py-2 px-2 mb-3 w-100"
                 v-for="item in todos"
-                :key="item.id">
-                <button type="button" class="btn btn-outline-primary d-flex align-items-center w-100 py-1 px-2 mb-3"
-                :class="{ 'active': item.completed_at !== null }"
+                :key="item.id"
+                :class="{ 'bg-primary': item.completed_at !== null }"
                 @click.prevent="doneTodo(item.id)">
-                  <i class="bi bi-check-circle-fill text-light fs-4"></i>
-                  <p class="px-3">{{ item.content }}</p>
-                </button>
-                <a href=""><i class="fa-solid fa-pencil d-inline-block mb-3 ms-2"></i></a>
-                <a href=""><i class="fa-regular fa-trash-can d-inline-block mb-3 ms-2" @click.prevent="deleteTodo(item.id)"></i></a>
+                <div class="row w-100 justify-content-between">
+                  <div class="col-10 d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill text-light fs-4"></i>
+                    <p class="px-3"
+                    :class="{ 'text-light': item.completed_at !== null }">{{ item.content }}</p>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-end">
+                    <!-- <a href=""><i class="fa-solid fa-pencil d-inline-block ms-2"
+                      :class="{ 'text-light': item.completed_at !== null }"
+                      @click.prevent.stop=""></i></a> -->
+                    <a href=""><i class="fa-regular fa-trash-can ms-2"
+                      :class="{ 'text-light': item.completed_at !== null }"
+                      @click.prevent.stop="deleteTodo(item.id)"></i></a>
+                  </div>
+                </div>
               </li>
             </ul>
             <ul v-else>
@@ -47,21 +56,30 @@
             </ul>
           </div>
         </div>
-        <div class="card border-primary me-md-3 mb-3 mx-auto w-25">
+        <div class="card border-primary me-md-3 mb-4 mx-auto w-100">
           <div class="card-header fs-4 fw-bold p-3 text-center text-secondary">Family</div>
           <div class="card-body text-primary">
             <ul v-if="todos.length > 0">
-              <li class="d-flex align-items-center"
+              <li class="d-flex justify-content-start align-items-center border rounded py-2 px-2 mb-3 w-100"
                 v-for="item in todos"
-                :key="item.id">
-                <button type="button" class="btn btn-outline-primary d-flex align-items-center w-100 py-1 px-2 mb-3"
-                :class="{ 'active': item.completed_at !== null }"
+                :key="item.id"
+                :class="{ 'bg-primary': item.completed_at !== null }"
                 @click.prevent="doneTodo(item.id)">
-                  <i class="bi bi-check-circle-fill text-light fs-4"></i>
-                  <p class="px-3">{{ item.content }}</p>
-                </button>
-                <a href=""><i class="fa-solid fa-pencil d-inline-block mb-3 ms-2"></i></a>
-                <a href=""><i class="fa-regular fa-trash-can d-inline-block mb-3 ms-2" @click.prevent="deleteTodo(item.id)"></i></a>
+                <div class="row w-100 justify-content-between">
+                  <div class="col-10 d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill text-light fs-4"></i>
+                    <p class="px-3"
+                    :class="{ 'text-light': item.completed_at !== null }">{{ item.content }}</p>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-end">
+                    <!-- <a href=""><i class="fa-solid fa-pencil d-inline-block ms-2"
+                      :class="{ 'text-light': item.completed_at !== null }"
+                      @click.prevent.stop=""></i></a> -->
+                    <a href=""><i class="fa-regular fa-trash-can ms-2"
+                      :class="{ 'text-light': item.completed_at !== null }"
+                      @click.prevent.stop="deleteTodo(item.id)"></i></a>
+                  </div>
+                </div>
               </li>
             </ul>
             <ul v-else>
@@ -69,21 +87,30 @@
             </ul>
           </div>
         </div>
-        <div class="card border-primary mb-3 mx-auto w-25">
+        <div class="card border-primary mb-4 mx-auto w-100">
           <div class="card-header fs-4 fw-bold p-3 text-center text-secondary">Work</div>
-          <div class="card-body">
+          <div class="card-body text-primary">
             <ul v-if="todos.length > 0">
-              <li class="d-flex align-items-center"
+              <li class="d-flex justify-content-start align-items-center border rounded py-2 px-2 mb-3 w-100"
                 v-for="item in todos"
-                :key="item.id">
-                <button type="button" class="btn btn-outline-primary d-flex align-items-center w-100 py-1 px-2 mb-3"
-                :class="{ 'active': item.completed_at !== null }"
+                :key="item.id"
+                :class="{ 'bg-primary': item.completed_at !== null }"
                 @click.prevent="doneTodo(item.id)">
-                  <i class="bi bi-check-circle-fill text-light fs-4"></i>
-                  <p class="px-3">{{ item.content }}</p>
-                </button>
-                <a href=""><i class="fa-solid fa-pencil d-inline-block mb-3 ms-2"></i></a>
-                <a href=""><i class="fa-regular fa-trash-can d-inline-block mb-3 ms-2" @click.prevent="deleteTodo(item.id)"></i></a>
+                <div class="row w-100 justify-content-between">
+                  <div class="col-10 d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill text-light fs-4"></i>
+                    <p class="px-3"
+                    :class="{ 'text-light': item.completed_at !== null }">{{ item.content }}</p>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-end">
+                    <!-- <a href=""><i class="fa-solid fa-pencil d-inline-block ms-2"
+                      :class="{ 'text-light': item.completed_at !== null }"
+                      @click.prevent.stop=""></i></a> -->
+                    <a href=""><i class="fa-regular fa-trash-can ms-2"
+                      :class="{ 'text-light': item.completed_at !== null }"
+                      @click.prevent.stop="deleteTodo(item.id)"></i></a>
+                  </div>
+                </div>
               </li>
             </ul>
             <ul v-else>
@@ -92,10 +119,10 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8 col-10 m-auto mt-3 mb-3">
+      <div class="col-md-9 col-11 mx-auto p-0">
         <ul class="d-flex justify-content-between align-items-center">
           <li>尚有 {{ undone.length }} 項待辦</li>
-          <li class="btn btn-outline-primary">清除已完成項目</li>
+          <li class="btn btn-outline-primary" @click.prevent="deleteAll">清除已完成項目</li>
         </ul>
       </div>
     </div>
@@ -103,7 +130,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import router from '@/router'
@@ -146,8 +173,6 @@ export default {
     onMounted(() => {
       getTodo()
     })
-    // 尚有 xx 待辦 待研究！
-    const undone = todos.value.filter((todo) => todo.completed_at === null)
     const newTodo = ref('')
     const addTodo = () => {
       if (newTodo.value === '') {
@@ -172,6 +197,7 @@ export default {
           obj.content = Response.data.content
           todos.value.unshift(obj)
           getTodo()
+          newTodo.value.focus()
         })
         .catch((Error) => console.log(Error))
       newTodo.value = ''
@@ -220,6 +246,41 @@ export default {
         })
         .catch((Error) => console.log(Error))
     }
+    const deleteAll = () => {
+      const options = {
+        headers: {
+          Authorization: token
+        }
+      }
+      const doneUrl = todos.value.filter((todo) => todo.completed_at !== null)
+      if (doneUrl.length === 0) {
+        errorAlert()
+      } else {
+        doneUrl.forEach((todo) => {
+          const url = `${api}/todos/${todo.id}`
+          axios.delete(url, options)
+            .then(res => getTodo())
+            .catch(error => {
+              console.log(error)
+            })
+          deleteAlert()
+        })
+      }
+      // console.log('doneUrl', doneUrl)
+      // const url1 = `${api}/todos/82f2eef2b33dc7f9d671167e37a2e885`
+      // const url2 = `${api}/todos/82fd863de55c4011dadcb250ce6c881e`
+
+      // const promise1 = axios.delete(url1, options)
+      // const promise2 = axios.delete(url2, options)
+
+      // Promise.all([promise1, promise2])
+      //   .then((res) => {
+      //     console.log(res)
+      //     getTodo()
+      //   })
+    }
+    // 未完成待辦數量
+    const undone = computed(() => todos.value.filter((todo) => todo.completed_at === null))
 
     // alert
     const addAlert = () => {
@@ -262,6 +323,14 @@ export default {
         width: 400
       })
     }
+    const errorAlert = () => {
+      Swal.fire({
+        title: 'Todo undo!',
+        showConfirmButton: false,
+        timer: 1500,
+        width: 400
+      })
+    }
 
     return {
       // data
@@ -277,7 +346,8 @@ export default {
       logout,
       editTodo,
       deleteTodo,
-      doneTodo
+      doneTodo,
+      deleteAll
     }
   }
 }

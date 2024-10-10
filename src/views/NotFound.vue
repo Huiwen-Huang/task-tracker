@@ -3,6 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-8">
         <img src="../assets/img/404 Error.png" alt="404 not found" class="w-75 d-block mx-auto mt-3">
+        <img src="../assets/img/404 Error.png" alt="404 not found" class="w-75 d-block mx-auto mt-3">
       </div>
     </div>
   </div>

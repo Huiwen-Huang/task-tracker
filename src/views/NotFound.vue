@@ -1,9 +1,8 @@
 <template>
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-8">
-        <img src="../assets/img/404 Error.png" alt="404 not found" class="w-75 d-block mx-auto mt-3">
-        <img src="../assets/img/404 Error.png" alt="404 not found" class="w-75 d-block mx-auto mt-3">
+  <div class="container-fluid px-lg-5">
+    <div class="row justify-content-center align-items-center px-lg-5">
+      <div class="col-md-8 col-12 p-0 px-lg-5">
+        <img src="../assets/img/404 Error.png" alt="404 not found" class="w-100 d-block px-lg-8 m-auto">
       </div>
     </div>
   </div>
@@ -54,3 +53,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .row{
+    min-height: 100vh;
+  }
+</style>
